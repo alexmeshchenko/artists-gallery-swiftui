@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Select Xcode version
+      run: sudo xcode-select -s '/Applications/Xcode_16.0.app/Contents/Developer'
+    - name: Build and Test
+      run: |
+        cd ArtistsGallery
+        xcodebuild -scheme ArtistsGallery -destination 'platform=iOS Simulator,name=iPhone 15' test
