@@ -62,13 +62,6 @@ open ArtistsGallery.xcodeproj
 
 ## 🎯 Tasks
 
-### Basic Tasks
-- [ ] Create main screen with artists list
-- [ ] Implement search functionality
-- [ ] Create artist detail screen
-- [ ] Add artwork viewing
-- [ ] Implement fullscreen mode
-
 ### Advanced Tasks
 - [ ] Add artist creation form
 - [ ] Implement artwork addition
