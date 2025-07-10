@@ -9,27 +9,58 @@ import SwiftUI
 
 struct ArtistDetailView: View {
     let artist: Artist
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
-                // Заголовок с фото и именем художника
-                headerSection
-                
-                // Основной контент
-                VStack(alignment: .leading, spacing: 24) {
-                    // Биография
-                    biographySection
+        ZStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 0) {
+                    // Заголовок с фото и именем художника
+                    headerSection
                     
-                    // Работы
-                    worksSection
+                    // Основной контент
+                    VStack(alignment: .leading, spacing: 24) {
+                        // Биография
+                        biographySection
+                        
+                        // Работы
+                        worksSection
+                    }
+                    .padding()
                 }
-                .padding()
-            }
+            }            
+            // Плавающие кнопки навигации
+            floatingNavigationButtons
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarHidden(true)
         .navigationDestination(for: Artwork.self) { artwork in
             ArtworkDetailView(artwork: artwork)
+        }
+    }
+    
+    // MARK: - Floating Navigation Buttons
+    private var floatingNavigationButtons: some View {
+        VStack {
+            HStack {
+                // Кнопка "Назад"
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "arrow.backward")
+                        .font(.title2)
+                        .fontWeight(.medium)
+                        .foregroundColor(.white)
+                        .frame(width: 44, height: 44)
+                        .background(Color.black.opacity(0.2))
+                        .clipShape(Circle())
+                }
+                
+                Spacer()
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 10) // Отступ от верха экрана
+            
+            Spacer()
         }
     }
     
@@ -40,12 +71,12 @@ struct ArtistDetailView: View {
             if !artist.image.isEmpty {
                 Image(artist.image)
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: 300)
-                    .clipped()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: .infinity)
             } else {
                 Rectangle()
                     .fill(Color.gray.opacity(0.3))
+                    .frame(maxWidth: .infinity)
                     .frame(height: 300)
                     .overlay(
                         Image(systemName: "person.fill")
@@ -65,7 +96,7 @@ struct ArtistDetailView: View {
             // Текст поверх фото
             VStack(alignment: .leading, spacing: 4) {
                 Text(artist.name)
-                    .font(.largeTitle)
+                    .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                 

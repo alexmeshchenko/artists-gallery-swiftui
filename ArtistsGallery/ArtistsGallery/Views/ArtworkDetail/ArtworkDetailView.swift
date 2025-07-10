@@ -10,27 +10,59 @@ import SwiftUI
 // MARK: - Placeholder for ArtworkDetailView
 struct ArtworkDetailView: View {
     let artwork: Artwork
+    @Environment(\.dismiss) private var dismiss
     @State private var showingFullscreen = false
     
     var body: some View {
-        VStack(spacing: 0) {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
-                    // Изображение работы (неискаженное, необрезанное)
-                    artworkImageSection
-                    
-                    // Текстовая описательная часть
-                    artworkInfoSection
-                        .padding()
+        ZStack {
+            VStack(spacing: 0) {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 0) {
+                        // Изображение работы (неискаженное, необрезанное)
+                        artworkImageSection
+                        
+                        // Текстовая описательная часть
+                        artworkInfoSection
+                            .padding()
+                    }
                 }
+                
+                // Кнопка "Развернуть"
+                expandButton
             }
-            
-            // Кнопка "Развернуть"
-            expandButton
+            // Плавающие кнопки навигации
+            floatingNavigationButtons
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarHidden(true)
         .fullScreenCover(isPresented: $showingFullscreen) {
             FullscreenArtworkView(artwork: artwork)
+        }
+    }
+    
+    // MARK: - Floating Navigation Buttons
+    private var floatingNavigationButtons: some View {
+        VStack {
+            HStack {
+                // Кнопка "Назад"
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "arrow.backward")
+                        .font(.title2)
+                        .fontWeight(.medium)
+                        .foregroundColor(.white)
+                        .frame(width: 44, height: 44)
+                        .background(Color.black.opacity(0.2))
+                        .clipShape(Circle())
+                }
+                
+                Spacer()
+                
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 10) // Отступ от верха экрана
+            
+            Spacer()
         }
     }
     
@@ -61,7 +93,7 @@ struct ArtworkDetailView: View {
         VStack(alignment: .leading, spacing: 16) {
             // Название картины
             Text(artwork.title)
-                .font(.largeTitle)
+                .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.primary)
             
@@ -86,5 +118,6 @@ struct ArtworkDetailView: View {
         .background(Color.black)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .padding(.horizontal, 16)
+        .padding(.bottom, 16)
     }
 }
