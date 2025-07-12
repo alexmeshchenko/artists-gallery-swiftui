@@ -9,58 +9,28 @@ import SwiftUI
 
 struct ArtistDetailView: View {
     let artist: Artist
-    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        ZStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
-                    // Заголовок с фото и именем художника
-                    headerSection
+        ScrollView {
+            VStack(alignment: .leading, spacing: 0) {
+                // Заголовок с фото и именем художника
+                headerSection
+                
+                // Основной контент
+                VStack(alignment: .leading, spacing: 24) {
+                    // Биография
+                    biographySection
                     
-                    // Основной контент
-                    VStack(alignment: .leading, spacing: 24) {
-                        // Биография
-                        biographySection
-                        
-                        // Работы
-                        worksSection
-                    }
-                    .padding()
+                    // Работы
+                    worksSection
                 }
-            }            
-            // Плавающие кнопки навигации
-            floatingNavigationButtons
+                .padding()
+            }
         }
+        .backButton()
         .navigationBarHidden(true)
         .navigationDestination(for: Artwork.self) { artwork in
             ArtworkDetailView(artwork: artwork)
-        }
-    }
-    
-    // MARK: - Floating Navigation Buttons
-    private var floatingNavigationButtons: some View {
-        VStack {
-            HStack {
-                // Кнопка "Назад"
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "arrow.backward")
-                        .font(.title2)
-                        .fontWeight(.medium)
-                        .foregroundColor(.white)
-                        .frame(width: 44, height: 44)
-                        .background(Color.black.opacity(0.2))
-                        .clipShape(Circle())
-                }
-                
-                Spacer()
-            }
-            .padding(.horizontal, 20)
-            .padding(.top, 10) // Отступ от верха экрана
-            
-            Spacer()
         }
     }
     
@@ -143,7 +113,6 @@ struct ArtistDetailView: View {
         }
     }
 }
-
 
 // MARK: - Preview
 #Preview {

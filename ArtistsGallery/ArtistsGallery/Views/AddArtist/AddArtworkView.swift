@@ -20,15 +20,15 @@ struct AddArtworkView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Информация о работе") {
-                    TextField("Название", text: $title)
-                    TextField("URL изображения", text: $imageURL)
-                    TextField("Описание", text: $info, axis: .vertical)
+                Section("Information about the picture") {
+                    TextField("Title", text: $title)
+                    TextField("Image URL", text: $imageURL)
+                    TextField("Description", text: $info, axis: .vertical)
                         .lineLimit(3...6)
                 }
                 
                 if !imageURL.isEmpty {
-                    Section("Предварительный просмотр") {
+                    Section("Peviewing") {
                         AsyncImage(url: URL(string: imageURL)) { image in
                             image
                                 .resizable()

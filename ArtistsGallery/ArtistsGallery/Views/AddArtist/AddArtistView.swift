@@ -20,14 +20,14 @@ struct AddArtistView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Информация о художнике") {
-                    TextField("Имя", text: $name)
-                    TextField("Биография", text: $bio, axis: .vertical)
+                Section("Information about the artist") {
+                    TextField("Name", text: $name)
+                    TextField("Biography", text: $bio, axis: .vertical)
                         .lineLimit(3...6)
-                    TextField("URL изображения", text: $imageURL)
+                    TextField("Image URL", text: $imageURL)
                 }
                 
-                Section("Работы") {
+                Section("Work") {
                     ForEach(works) { artwork in
                         VStack(alignment: .leading) {
                             Text(artwork.title)
@@ -39,22 +39,22 @@ struct AddArtistView: View {
                     }
                     .onDelete(perform: deleteArtwork)
                     
-                    Button("Добавить работу") {
-                        works.append(Artwork(title: "Новая работа", image: "", info: ""))
+                    Button("Add picture") {
+                        works.append(Artwork(title: "The new picture", image: "", info: ""))
                     }
                 }
             }
-            .navigationTitle("Новый художник")
+            .navigationTitle("A new artist")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Отмена") {
+                    Button("Cancel") {
                         dismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Сохранить") {
+                    Button("Save") {
                         saveArtist()
                     }
                     .disabled(name.isEmpty || bio.isEmpty)

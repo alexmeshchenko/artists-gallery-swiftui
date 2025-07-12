@@ -5,7 +5,6 @@
 //  Created by Aleksandr Meshchenko on 10.07.25.
 //
 
-
 import SwiftUI
 
 // MARK: - FullscreenArtworkView
@@ -47,45 +46,29 @@ struct FullscreenArtworkView: View {
                                 }
                             }
                             .simultaneously(with:
-                                DragGesture()
-                                    .onChanged { value in
-                                        if scale > 1.0 {
-                                            offset = value.translation
+                                                DragGesture()
+                                .onChanged { value in
+                                    if scale > 1.0 {
+                                        offset = value.translation
+                                    }
+                                }
+                                .onEnded { _ in
+                                    if scale <= 1.0 {
+                                        withAnimation(.spring()) {
+                                            offset = .zero
                                         }
                                     }
-                                    .onEnded { _ in
-                                        if scale <= 1.0 {
-                                            withAnimation(.spring()) {
-                                                offset = .zero
-                                            }
-                                        }
-                                    }
-                            )
+                                }
+                                           )
                     )
             } else {
                 Text("No Image Available")
                     .foregroundColor(.white)
                     .font(.title)
             }
-            
-            // Кнопка закрытия
-            VStack {
-                HStack {
-                    Spacer()
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "xmark")
-                            .font(.title2)
-                            .foregroundColor(.black)
-                            .padding()
-                            .background(Color.white.opacity(0.6))
-                            .clipShape(Circle())
-                    }
-                    .padding()
-                }
-                Spacer()
-            }
+        }
+        .closeButton {
+            dismiss()
         }
         .statusBarHidden()
         .onTapGesture(count: 2) {
