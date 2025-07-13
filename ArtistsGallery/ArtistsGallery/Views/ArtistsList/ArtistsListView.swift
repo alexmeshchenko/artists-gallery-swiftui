@@ -27,7 +27,7 @@ struct ArtistsListView: View {
                         } label: {
                             Image(systemName: "plus.circle")
                                 .font(.title3)
-                                .foregroundColor(.primary)
+                                .foregroundStyle(Color.primary)
                         }
                     }
                 }
@@ -50,7 +50,7 @@ struct ArtistsListView: View {
                 Text("Error")
                     .font(.headline)
                 Text(error)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
                 Button("Try again") {
                     dataManager.loadArtists()

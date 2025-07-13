@@ -51,7 +51,7 @@ struct ArtistDetailView: View {
                     .overlay(
                         Image(systemName: "person.fill")
                             .font(.system(size: 80))
-                            .foregroundColor(.gray)
+                            .foregroundStyle(.gray)
                     )
             }
             
@@ -68,11 +68,11 @@ struct ArtistDetailView: View {
                 Text(artist.name)
                     .font(.title)
                     .fontWeight(.bold)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
                 
                 Text("Author")
                     .font(.title3)
-                    .foregroundColor(.white.opacity(0.9))
+                    .foregroundStyle(.white.opacity(0.9))
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 20)
@@ -85,11 +85,11 @@ struct ArtistDetailView: View {
             Text("Biography")
                 .font(.title2)
                 .fontWeight(.bold)
-                .foregroundColor(.primary)
+                .foregroundStyle(.primary)
             
             Text(artist.bio)
                 .font(.body)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .lineSpacing(2)
         }
     }
@@ -100,7 +100,7 @@ struct ArtistDetailView: View {
             Text("Works")
                 .font(.title2)
                 .fontWeight(.bold)
-                .foregroundColor(.primary)
+                .foregroundStyle(.primary)
             
             VStack(spacing: 20) {
                 ForEach(artist.works) { artwork in

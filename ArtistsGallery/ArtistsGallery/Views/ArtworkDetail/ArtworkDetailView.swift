@@ -53,7 +53,7 @@ struct ArtworkDetailView: View {
                     .overlay(
                         Image(systemName: "photo")
                             .font(.system(size: 60))
-                            .foregroundColor(.gray)
+                            .foregroundStyle(.gray)
                     )
             }
         }
@@ -66,12 +66,12 @@ struct ArtworkDetailView: View {
             Text(artwork.title)
                 .font(.title)
                 .fontWeight(.bold)
-                .foregroundColor(.primary)
+                .foregroundStyle(.primary)
             
             // Описание картины
             Text(artwork.info)
                 .font(.body)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .lineSpacing(2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)

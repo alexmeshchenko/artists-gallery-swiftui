@@ -17,7 +17,7 @@ struct FullscreenArtworkView: View {
     
     var body: some View {
         ZStack {
-            Color.white.ignoresSafeArea()
+            Color.clear.ignoresSafeArea()
             
             if !artwork.image.isEmpty {
                 Image(artwork.image)
@@ -63,7 +63,7 @@ struct FullscreenArtworkView: View {
                     )
             } else {
                 Text("No Image Available")
-                    .foregroundColor(.white)
+                    .foregroundStyle(.secondary)
                     .font(.title)
             }
         }

@@ -30,7 +30,7 @@ struct ArtistCardView: View {
                     .overlay(
                         Image(systemName: "person.fill")
                             .font(.system(size: 30))
-                            .foregroundColor(.gray)
+                            .foregroundStyle(.gray)
                     )
             }
             
@@ -40,11 +40,11 @@ struct ArtistCardView: View {
                     .font(.headline)
                     .fontWeight(.semibold)
                     .lineLimit(1)
-                    .foregroundColor(.primary)
+                    .foregroundStyle(.primary)
                 
                 Text(artist.bio)
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
                 

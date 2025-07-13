@@ -21,7 +21,7 @@ struct BackButton: View {
             Image(systemName: icon)
                 .font(fontSize)
                 .fontWeight(fontWeight)
-                .foregroundColor(.primary)
+                .foregroundStyle(Color.primary)
                 .frame(width: size, height: size)
                 .background(Color(.systemGray5))
                 .clipShape(Circle())
@@ -90,7 +90,7 @@ extension View {
                 .backButton()
                 .overlay(alignment: .center) {
                     Text("Light Mode")
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                         .font(.headline)
                 }
             
@@ -122,7 +122,7 @@ extension View {
                 .backButton()
                 .overlay(alignment: .center) {
                     Text("Dark Mode")
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                         .font(.headline)
                 }
             

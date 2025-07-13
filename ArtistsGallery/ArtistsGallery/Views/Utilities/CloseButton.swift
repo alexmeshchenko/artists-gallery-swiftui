@@ -19,10 +19,10 @@ struct CloseButton: View {
         Button(action: action) {
             Image(systemName: icon)
                 .font(fontSize)
-                .foregroundColor(.primary)
+                .foregroundStyle(Color.primary)
                 .padding(padding)
-                .background(Color(.systemGray5))
-                .clipShape(Circle())
+                .background(.ultraThinMaterial)
+                .clipShape(.circle)
         }
     }
 }
@@ -95,17 +95,66 @@ extension View {
 }
 
 // MARK: - Preview
-#Preview {
+#Preview("CloseButton - Light") {
     VStack(spacing: 40) {
-        ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
-            VStack {
-                CloseButton { print("Tapped") }
-                Text(scheme == .light ? "Light" : "Dark")
-                    .font(.caption)
-            }
-            .padding()
-            .background(Color(.systemBackground))
-            .environment(\.colorScheme, scheme)
+        ZStack {
+            Image(systemName: "photo")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(height: 200)
+                .clipShape(.rect(cornerRadius: 12, style: .continuous))
+                .closeButton {
+                    print("Close tapped")
+                }
         }
+        
+        HStack(spacing: 20) {
+            CloseButton { print("Close") }
+            
+            CloseButton { print("Chevron") }
+                .icon("chevron.down")
+            
+            CloseButton { print("Custom") }
+                .fontSize(.title)
+                .padding(16)
+        }
+        
+        Spacer()
     }
+    .padding()
+    .background(Color(.systemBackground))
+    .environment(\.colorScheme, .light)
+}
+
+#Preview("CloseButton - Dark") {
+    VStack(spacing: 40) {
+        ZStack {
+            LinearGradient(
+                colors: [.blue, .purple],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .frame(height: 200)
+            .clipShape(.rect(cornerRadius: 12, style: .continuous))
+            .closeButton(position: .topLeading) {
+                print("Close tapped")
+            }
+        }
+        
+        HStack(spacing: 20) {
+            CloseButton { print("Close") }
+            
+            CloseButton { print("Chevron") }
+                .icon("chevron.down")
+            
+            CloseButton { print("Custom") }
+                .fontSize(.title)
+                .padding(16)
+        }
+        
+        Spacer()
+    }
+    .padding()
+    .background(Color(.systemBackground))
+    .environment(\.colorScheme, .dark)
 }

@@ -34,7 +34,7 @@ struct AddArtistView: View {
                                 .font(.headline)
                             Text(artwork.info)
                                 .font(.caption)
-                                .foregroundColor(.secondary)
+                                .foregroundStyle(Color.secondary)
                         }
                     }
                     .onDelete(perform: deleteArtwork)

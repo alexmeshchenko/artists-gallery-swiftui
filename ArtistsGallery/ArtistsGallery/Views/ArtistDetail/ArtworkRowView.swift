@@ -21,27 +21,50 @@ struct ArtworkRowView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(maxWidth: .infinity, maxHeight: 200)
                     .clipped()
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .clipShape(.rect(cornerRadius: 12, style: .continuous))
                        
             } else {
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color.gray.opacity(0.2))
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 200)
-                    .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(Color(.systemGray6))
+                    .frame(maxWidth: .infinity, maxHeight: 200)
+                    .overlay {
                         Image(systemName: "photo")
                             .font(.system(size: 40))
-                            .foregroundColor(.gray)
-                    )
+                            .foregroundStyle(.secondary)
+                    }
             }
             
             // Название работы под изображением
             Text(artwork.title)
                 .font(.headline)
                 .fontWeight(.semibold)
-                .foregroundColor(.primary)
+                .foregroundStyle(.primary)
                 .multilineTextAlignment(.leading)
                 .padding(.horizontal, 4)
         }
     }
+}
+
+// MARK: - Preview
+#Preview("ArtworkRow") {
+    VStack(spacing: 20) {
+        // С изображением
+        ArtworkRowView(
+            artwork: Artwork(
+                title: "Guernica",
+                image: "Picasso1",
+                info: "A powerful anti-war painting"
+            )
+        )
+        
+        // Без изображения
+        ArtworkRowView(
+            artwork: Artwork(
+                title: "The Starry Night",
+                image: "",
+                info: "Van Gogh's masterpiece"
+            )
+        )
+    }
+    .padding()
 }
