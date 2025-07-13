@@ -5,10 +5,9 @@
 //  Created by Aleksandr Meshchenko on 10.07.25.
 //
 
-
 import Foundation
 
-// В Swift 6 используем @Observable
+// С iOS 17+ используем @Observable
 @Observable
 class DataManager {
     private(set) var artists: [Artist] = []
@@ -36,7 +35,18 @@ class DataManager {
         do {
             let decoder = JSONDecoder()
             let artistsData = try decoder.decode(ArtistsData.self, from: data)
-            artists = artistsData.artists
+            
+            // Преобразуем CodableArtist в Artist
+            artists = artistsData.artists.map { codableArtist in
+                let artist = Artist(
+                    name: codableArtist.name,
+                    bio: codableArtist.bio,
+                    image: codableArtist.image
+                )
+                artist.works = codableArtist.works
+                return artist
+            }
+            
             isLoading = false
         } catch {
             self.error = "Data parsing error: \(error.localizedDescription)"
@@ -71,7 +81,17 @@ class DataManager {
     }
 }
 
+// MARK: - Codable Models for JSON Decoding
+
 // Модель для декодирования JSON
 struct ArtistsData: Codable {
-    let artists: [Artist]
+    let artists: [CodableArtist]
+}
+
+// Codable версия Artist для декодирования
+struct CodableArtist: Codable {
+    let name: String
+    let bio: String
+    let image: String
+    let works: [Artwork]
 }

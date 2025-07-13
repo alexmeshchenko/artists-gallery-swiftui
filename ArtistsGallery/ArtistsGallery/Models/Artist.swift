@@ -9,9 +9,10 @@
 import Foundation
 import SwiftUI
 
-// В Swift 6 используем @Observable вместо ObservableObject
+// В iOS 17+ используем @Observable вместо ObservableObject
+// @Observable классы не должны наследоваться от Codable напрямую. Это может вызвать проблемы(какие?)
 @Observable
-class Artist: Identifiable, Codable, Hashable {
+class Artist: Identifiable, Hashable {
     let id = UUID()
     var name: String
     var bio: String

@@ -69,43 +69,38 @@ extension PrimaryButton {
 }
 
 // MARK: - Preview
-#Preview("PrimaryButton Auto Theme") {
+#Preview("PrimaryButton - Light") {
     VStack(spacing: 20) {
-        // Light mode preview
-        VStack(spacing: 20) {
-            Text("Light Mode")
-                .font(.headline)
-            
-            PrimaryButton(title: "Continue") {
-                print("Tapped")
-            }
-            
-            PrimaryButton(title: "Confirm") { }
-                .cornerRadius(8)
-                .height(48)
-        }
-        .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
-        .preferredColorScheme(.light)
+        Text("Light Mode")
+            .font(.headline)
         
-        // Dark mode preview
-        VStack(spacing: 20) {
-            Text("Dark Mode")
-                .font(.headline)
-            
-            PrimaryButton(title: "Continue") {
-                print("Tapped")
-            }
-            
-            PrimaryButton(title: "Confirm") { }
-                .cornerRadius(8)
-                .height(48)
+        PrimaryButton(title: "Continue") {
+            print("Tapped")
         }
-        .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
-        .preferredColorScheme(.dark)
+        
+        PrimaryButton(title: "Confirm") { }
+            .cornerRadius(8)
+            .height(48)
     }
     .padding()
+    .background(Color(.systemBackground))
+    .environment(\.colorScheme, .light)
+}
+
+#Preview("PrimaryButton - Dark") {
+    VStack(spacing: 20) {
+        Text("Dark Mode")
+            .font(.headline)
+        
+        PrimaryButton(title: "Continue") {
+            print("Tapped")
+        }
+        
+        PrimaryButton(title: "Confirm") { }
+            .cornerRadius(8)
+            .height(48)
+    }
+    .padding()
+    .background(Color(.systemBackground))
+    .environment(\.colorScheme, .dark)
 }

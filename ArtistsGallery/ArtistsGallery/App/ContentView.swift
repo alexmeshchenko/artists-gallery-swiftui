@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ArtistsListView()
-                .environment(dataManager) // Swift 6: новый способ передачи данных
+                .environment(dataManager) // С iOS 17+: новый способ передачи данных
         }
     }
 }
