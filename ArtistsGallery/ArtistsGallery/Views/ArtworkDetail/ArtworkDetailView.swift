@@ -26,7 +26,7 @@ struct ArtworkDetailView: View {
             }
             
             // Кнопка "Развернуть"
-            PrimaryButton.black(title: "Expand") {
+            PrimaryButton(title: "Expand") {
                 showingFullscreen = true
             }
         }
