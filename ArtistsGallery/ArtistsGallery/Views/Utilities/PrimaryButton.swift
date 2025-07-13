@@ -4,12 +4,6 @@
 //
 //  Created by Aleksandr Meshchenko on 12.07.25.
 //
-//
-//  PrimaryButton.swift
-//  ArtistsGallery
-//
-//  Created by Aleksandr Meshchenko on 12.07.25.
-//
 
 import SwiftUI
 

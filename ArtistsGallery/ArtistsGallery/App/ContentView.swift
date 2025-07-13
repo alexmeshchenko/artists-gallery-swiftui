@@ -8,12 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var dataManager = DataManager.shared
-
     var body: some View {
         NavigationStack {
             ArtistsListView()
-                .environment(dataManager) // С iOS 17+: новый способ передачи данных
         }
     }
 }

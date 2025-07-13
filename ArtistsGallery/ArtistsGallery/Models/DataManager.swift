@@ -9,14 +9,12 @@ import Foundation
 
 // С iOS 17+ используем @Observable
 @Observable
-class DataManager {
+final class DataManager {
     private(set) var artists: [Artist] = []
     private(set) var isLoading = false
     private(set) var error: String?
     
-    static let shared = DataManager()
-    
-    private init() {
+    init() {
         loadArtists()
     }
     

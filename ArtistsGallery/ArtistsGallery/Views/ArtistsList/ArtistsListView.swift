@@ -72,6 +72,7 @@ struct ArtistsListView: View {
 
 // MARK: - Preview
 #Preview {
-    ArtistsListView()
-        .environment(DataManager.shared)
+    let dataManager = DataManager()
+    return ArtistsListView()
+        .environment(dataManager)
 }
