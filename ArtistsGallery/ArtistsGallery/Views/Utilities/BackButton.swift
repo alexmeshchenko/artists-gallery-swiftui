@@ -82,36 +82,18 @@ extension View {
 }
 
 // MARK: - Preview
-#Preview("BackButton Auto Theme") {
+#Preview("BackButton - Light") {
     NavigationView {
         VStack(spacing: 40) {
-            // Light mode
-            VStack {
-                Color.blue
-                    .frame(height: 200)
-                    .backButton()
-                    .overlay(alignment: .center) {
-                        Text("Light Mode")
-                            .foregroundColor(.white)
-                            .font(.headline)
-                    }
-            }
-            .preferredColorScheme(.light)
+            Color.blue
+                .frame(height: 200)
+                .backButton()
+                .overlay(alignment: .center) {
+                    Text("Light Mode")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                }
             
-            // Dark mode
-            VStack {
-                Color.blue
-                    .frame(height: 200)
-                    .backButton()
-                    .overlay(alignment: .center) {
-                        Text("Dark Mode")
-                            .foregroundColor(.white)
-                            .font(.headline)
-                    }
-            }
-            .preferredColorScheme(.dark)
-            
-            // Standalone buttons
             HStack(spacing: 20) {
                 BackButton { print("Back") }
                 
@@ -126,6 +108,40 @@ extension View {
             Spacer()
         }
         .padding()
+        .background(Color(.systemBackground))
         .navigationBarHidden(true)
     }
+    .environment(\.colorScheme, .light)
+}
+
+#Preview("BackButton - Dark") {
+    NavigationView {
+        VStack(spacing: 40) {
+            Color.blue
+                .frame(height: 200)
+                .backButton()
+                .overlay(alignment: .center) {
+                    Text("Dark Mode")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                }
+            
+            HStack(spacing: 20) {
+                BackButton { print("Back") }
+                
+                BackButton { print("Chevron") }
+                    .icon("chevron.left")
+                
+                BackButton { print("Close") }
+                    .icon("xmark")
+                    .size(50)
+            }
+            
+            Spacer()
+        }
+        .padding()
+        .background(Color(.systemBackground))
+        .navigationBarHidden(true)
+    }
+    .environment(\.colorScheme, .dark)
 }

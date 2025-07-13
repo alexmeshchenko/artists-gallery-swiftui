@@ -22,8 +22,12 @@ struct ArtistsListView: View {
                 .navigationTitle("Artists")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("Add") {
+                        Button {
                             showingAddArtist = true
+                        } label: {
+                            Image(systemName: "plus.circle")
+                                .font(.title3)
+                                .foregroundColor(.primary)
                         }
                     }
                 }

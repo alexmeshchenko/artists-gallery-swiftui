@@ -95,51 +95,17 @@ extension View {
 }
 
 // MARK: - Preview
-#Preview("CloseButton Auto Theme") {
+#Preview {
     VStack(spacing: 40) {
-        // Light mode
-        VStack {
-            Color.green
-                .frame(height: 200)
-                .closeButton {
-                    print("Close tapped")
-                }
-                .overlay(alignment: .center) {
-                    Text("Light Mode")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                }
+        ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
+            VStack {
+                CloseButton { print("Tapped") }
+                Text(scheme == .light ? "Light" : "Dark")
+                    .font(.caption)
+            }
+            .padding()
+            .background(Color(.systemBackground))
+            .environment(\.colorScheme, scheme)
         }
-        .preferredColorScheme(.light)
-        
-        // Dark mode
-        VStack {
-            Color.green
-                .frame(height: 200)
-                .closeButton(position: .topLeading) {
-                    print("Close tapped")
-                }
-                .overlay(alignment: .center) {
-                    Text("Dark Mode")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                }
-        }
-        .preferredColorScheme(.dark)
-        
-        // Standalone buttons
-        HStack(spacing: 20) {
-            CloseButton { print("Close") }
-            
-            CloseButton { print("Chevron") }
-                .icon("chevron.down")
-            
-            CloseButton { print("Custom") }
-                .fontSize(.title)
-                .padding(16)
-        }
-        
-        Spacer()
     }
-    .padding()
 }
